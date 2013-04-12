@@ -62,7 +62,7 @@ public class MoonFx {
      * @return Moon's age in days (number of days from New Moon)
      */
     public double getSynodicPhase() {
-        long julianDate = this.getJulianDate();
+        double julianDate = this.getJulianDate();
 
         double moonsAge = (this._normalize((julianDate - 2451550.1) / 29.530588853) * 29.53);
         
@@ -72,9 +72,9 @@ public class MoonFx {
     /**
      * Get the Julian Date for the date specified by setDate()
      * 
-     * @return long
+     * @return single
      */
-    public long getJulianDate() {
+    public double getJulianDate() {
         
         Calendar gregorianDateCalendar = Calendar.getInstance();        
         gregorianDateCalendar.setTime(this.getDate());
@@ -89,7 +89,7 @@ public class MoonFx {
             month2 = month2 - 12;
         }
         
-        long julianDate = (int)(365.25 * (year2 + 4712)) + (int)(30.6 * month2 + .5) + day + 59;
+        double julianDate = (int)(365.25 * (year2 + 4712)) + (int)(30.6 * month2 + .5) + day + 59;
         
         if (julianDate > 2299160) {
             long k3 = (int)((int)((year2 / 100) + 49) * 0.75) - 38;
