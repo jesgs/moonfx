@@ -32,6 +32,11 @@ public class MoonFx {
     public static final double PI_RADIANS = 2 * Math.PI;
     
     /**
+     * Earth's radius in miles
+     */
+    public static final long EARTH_RADIUS_MI = 3959;
+    
+    /**
      * Date to check moon properties
      */
     protected Date moonDate;
@@ -62,11 +67,25 @@ public class MoonFx {
      * @return Moon's age in days (number of days from New Moon)
      */
     public double getSynodicPhase() {
-        double julianDate = this.getJulianDate();
-
-        double moonsAge = (this._normalize((julianDate - 2451550.1) / 29.530588853) * 29.53);
+        double moonsAge = (this._normalize((this.getJulianDate() - 2451550.1) / 29.530588853) * 29.53);
         
         return moonsAge;
+    }
+    
+    /**
+     * Distance from anomalistic phase
+     * 
+     * @return Distance in Earth radii
+     */
+    public double getDistanceInEarthRadii() {
+        double distanceInRadians = this._normalize((this.getJulianDate() - 2451562.2) / 27.55454988) * MoonFx.PI_RADIANS;
+        double synodicPhaseinRadians = this.getSynodicPhase() * MoonFx.PI_RADIANS;
+        
+        double distance = 60.4 - 3.3 * Math.cos(distanceInRadians) - .6 
+                        * Math.cos(2 * synodicPhaseinRadians - distanceInRadians) - .5 
+                        * Math.cos(2 * synodicPhaseinRadians);
+        
+        return distance;
     }
     
     /**
