@@ -37,6 +37,11 @@ public class MoonFx {
     public static final long EARTH_RADIUS_MI = 3959;
     
     /**
+     * Day constant
+     */
+    public static final long ONE_DAY = 86400000;
+    
+    /**
      * Date to check moon properties
      */
     protected Date moonDate;
@@ -86,6 +91,18 @@ public class MoonFx {
                         * Math.cos(2 * synodicPhaseinRadians);
         
         return distance;
+    }
+    
+    /**
+     * Get position of Moon
+     * 
+     * @return Moon's ecliptic latitude
+     */
+    public double getEclipticLatitude() {
+        double value = this._normalize((this.getJulianDate() - 2451565.2) / 27.212220817);
+        double eclipticLatitudeRadians = value * MoonFx.PI_RADIANS; // Convert to radians
+        
+        return eclipticLatitudeRadians;
     }
     
     /**

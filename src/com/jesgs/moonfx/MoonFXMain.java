@@ -1,12 +1,12 @@
 /**
  * (c) 2013 Jess Green / JesGs Development
- * 
+ *
  * Licensed under the GNU General Public License, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.gnu.org/licenses/gpl-3.0.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,9 +16,11 @@
 package com.jesgs.moonfx;
 
 import java.util.Calendar;
+import java.text.SimpleDateFormat;
+
 /**
  * Main class for debugging purposes
- * 
+ *
  * @author Jess Green <jgreen at psy-dreamer.com>
  */
 public class MoonFXMain {
@@ -27,16 +29,27 @@ public class MoonFXMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         Calendar today = Calendar.getInstance();
         MoonFx mnf = new MoonFx();
 
-        mnf.setDate(today.getTime());
-        
-        System.out.println(today.getTime());
-        System.out.println("Moon's age from new (days): " + mnf.getSynodicPhase());
-        System.out.println("Distance (Earth radii): " + (int)mnf.getDistanceInEarthRadii());
-        System.out.println("Distance (Miles): " + (int)(mnf.getDistanceInEarthRadii() * MoonFx.EARTH_RADIUS_MI));
-
+        int count = 0;
+        do {
+            long nextDayInMillis = today.getTimeInMillis() + MoonFx.ONE_DAY;
+            today.setTimeInMillis(nextDayInMillis);
+            mnf.setDate(today.getTime());
+            SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy");
+            
+            String date = sdf.format(today.getTime());
+            
+            System.out.println("========== (" + count + ") " + date + "==========");
+            System.out.println(today.getTime());
+            System.out.println("Moon's age from new (days): " + mnf.getSynodicPhase());
+            System.out.println("Distance (Earth radii): " + (int)mnf.getDistanceInEarthRadii());
+            System.out.println("Distance (Miles): " + (int)(mnf.getDistanceInEarthRadii() * MoonFx.EARTH_RADIUS_MI));
+            System.out.println("");
+            System.out.println("");            
+            count++;
+        } while (count < 29);
     }
 }
