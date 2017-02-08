@@ -122,7 +122,7 @@ public class MoonFx {
     /**
      * Get the Julian Date for the date specified by setDate()
      *
-     * @return single
+     * @return double
      */
     public double getJulianDate() {
 
