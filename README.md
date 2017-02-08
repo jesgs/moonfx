@@ -26,9 +26,17 @@ Java translation of [moonfx.bas](http://www.skyandtelescope.com/resources/softwa
 ### Examples
 ```java
 MoonFx moonFx = new MoonFx();
-moonFx.setDate(new Date());
+moonFx.setDate(new Date()); // Thu Feb 09 17:25:26 CST 2017
 
 System.out.println("Moon's age from new (days): " + moonFx.getSynodicPhase());
 System.out.println("Distance (Earth radii): " + (int)moonFx.getDistanceInEarthRadii());
 System.out.println("Distance (Miles): " + (int)(moonFx.getDistanceInEarthRadii() * MoonFx.EARTH_RADIUS_MI));
+```
+
+Outputs:
+
+```text
+Moon's age from new (days): 12.945493872886475
+Distance (Earth radii): 58
+Distance (Miles): 231066
 ```
