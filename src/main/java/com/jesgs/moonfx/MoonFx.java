@@ -133,16 +133,16 @@ public class MoonFx {
         int day   = gregorianDateCalendar.get(Calendar.DAY_OF_MONTH);
         int year  = gregorianDateCalendar.get(Calendar.YEAR);
 
-        long year2 = year - (int)((12 - month) / 10);
+        long year2 = year - ((12 - month) / 10);
         long month2 = month + 9;
         if (month2 >= 12) {
             month2 = month2 - 12;
         }
 
-        double julianDate = (int)(365.25 * (year2 + 4712)) + (int)(30.6 * month2 + .5) + day + 59;
+        double julianDate = (365.25 * (year2 + 4712)) + (30.6 * month2 + .5) + day + 59;
 
         if (julianDate > 2299160) {
-            long k3 = (int)((int)((year2 / 100) + 49) * 0.75) - 38;
+            double k3 = (((year2 / 100) + 49) * 0.75) - 38;
             julianDate = julianDate - k3;
         }
 
