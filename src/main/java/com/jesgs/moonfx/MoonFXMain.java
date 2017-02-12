@@ -33,23 +33,19 @@ public class MoonFXMain {
         Calendar today = Calendar.getInstance();
         MoonFx mnf = new MoonFx();
 
-        int count = 0;
-        do {
-            long nextDayInMillis = today.getTimeInMillis() + MoonFx.ONE_DAY;
-            today.setTimeInMillis(nextDayInMillis);
-            mnf.setDate(today.getTime());
-            SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy");
-            
-            String date = sdf.format(today.getTime());
-            
-            System.out.println("========== (" + count + ") " + date + "==========");
-            System.out.println(today.getTime());
-            System.out.println("Moon's age from new (days): " + mnf.getSynodicPhase());
-            System.out.println("Distance (Earth radii): " + (int)mnf.getDistanceInEarthRadii());
-            System.out.println("Distance (Miles): " + (int)(mnf.getDistanceInEarthRadii() * MoonFx.EARTH_RADIUS_MI));
-            System.out.println("");
-            System.out.println("");            
-            count++;
-        } while (count < 29);
+        mnf.setDate(today.getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy");
+
+        String date = sdf.format(today.getTime());
+
+        System.out.println("========== " + date + "==========");
+        System.out.println(today.getTime());
+        System.out.println("Julian Date: " + mnf.getJulianDate());
+        System.out.println("Moon's age from new (days): " + mnf.getSynodicPhase());
+
+        System.out.println("Distance (Earth radii): " + (int)mnf.getDistanceInEarthRadii());
+        System.out.println("Distance (Miles): " + (int)(mnf.getDistanceInEarthRadii() * MoonFx.EARTH_RADIUS_MI));
+        System.out.println("");
+        System.out.println("");
     }
 }
