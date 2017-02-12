@@ -40,3 +40,7 @@ Moon's age from new (days): 12.945493872886475
 Distance (Earth radii): 58
 Distance (Miles): 231066
 ```
+
+### Changelog
+* 1.0.1 Adjusted Julian Date calculation for better precision
+* 1.0.0 Initial release
