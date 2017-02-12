@@ -42,10 +42,9 @@ public class MoonFXMain {
         System.out.println(today.getTime());
         System.out.println("Julian Date: " + mnf.getJulianDate());
         System.out.println("Moon's age from new (days): " + mnf.getSynodicPhase());
-
+        System.out.println("Phase Angle: "  + mnf.getPhaseAngle(mnf.getSynodicPhase()));
+        System.out.println("Illuminated Ratio: " + (mnf.getIlluminatedRatio(mnf.getSynodicPhase()) * 100));
         System.out.println("Distance (Earth radii): " + (int)mnf.getDistanceInEarthRadii());
         System.out.println("Distance (Miles): " + (int)(mnf.getDistanceInEarthRadii() * MoonFx.EARTH_RADIUS_MI));
-        System.out.println("");
-        System.out.println("");
     }
 }
