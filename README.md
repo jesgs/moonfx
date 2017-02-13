@@ -3,25 +3,41 @@ MoonFx
 [![](https://jitpack.io/v/jesgs/moonfx.svg)](https://jitpack.io/#jesgs/moonfx)
 
 Java translation of [moonfx.bas](http://www.skyandtelescope.com/resources/software/3304911.html) by Bradley E. Schaefer.
+### Installation
+In root build.gradle:
+```groovy
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
 
-### Methods
-`void setDate(Date date)` : Sets the current date. Uses `java.util.Date`
+In app build.gradle:
+```groovy
+	dependencies {
+		compile 'com.github.jesgs:moonfx:v1.0.1'
+	}
+```
+### Usage
+`void setDate(Date date)` Sets the current date. Uses `java.util.Date`
 
-`Date getDate()` : Gets the current date in the form of a Date object
+`Date getDate()` Gets the current date in the form of a Date object
 
-`String getFormattedDate(String format)` : Returns a formatted date string, format specified by `format` parameter
+`String getFormattedDate(String format)` Returns a formatted date string, format specified by `format` parameter
 
-`double getSynodicDate()`: Get current synodic phase of the moon, aka Moon's age in days (number of days from New Moon)
+`double getSynodicDate()` Get current synodic phase of the moon, aka Moon's age in days (number of days from New Moon)
 
-`double getDistanceInEarthRadii()` : Get distance measured in Earth radii
+`double getDistanceInEarthRadii()` Get distance measured in Earth radii
 
-`double getEclipticLatitude()` : Get position of the Moon, aka Moon's ecliptic latitude
+`double getEclipticLatitude()` Get position of the Moon, aka Moon's ecliptic latitude
 
-`double getJulianDate()` : Get the Julian Date for the date specified by setDate()
+`double getJulianDate()` Get the Julian Date for the date specified by setDate()
 
-`double getPhaseAngle(double synodicAge)` : Get the current approximate phase angle of the Moon. Uses value from `getSynodicDate()`
+`double getPhaseAngle(double synodicAge)` Get the current approximate phase angle of the Moon. Uses value from `getSynodicDate()`
 
-`double getIlluminatedRatio(double synodicAge)` : Get Illuminated ratio of moon according to synodic age
+`double getIlluminatedRatio(double synodicAge)` Get Illuminated ratio of moon according to synodic age
 
 ### Examples
 ```java
