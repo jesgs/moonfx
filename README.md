@@ -2,7 +2,8 @@ MoonFx
 ======
 [![](https://jitpack.io/v/jesgs/moonfx.svg)](https://jitpack.io/#jesgs/moonfx)
 
-Java translation of [moonfx.bas](http://www.skyandtelescope.com/resources/software/3304911.html) by Bradley E. Schaefer.
+Calculate the phase, distance, phase-angle, and illuminated ratio of the moon on any given date. Based on [moonfx.bas](http://www.skyandtelescope.com/resources/software/3304911.html) from [Sky & Telescope](http://www.skyandtelescope.com).
+
 ### Installation
 In root build.gradle:
 ```groovy
