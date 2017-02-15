@@ -157,13 +157,9 @@ public class MoonFx {
      * @return
      */
     public double getPhaseAngle(double synodicAge) {
-        double phaseAngle = synodicAge * (360 / MoonFx.SYNODIC_PERIOD);
+        double phaseAngle = (synodicAge * (360 / MoonFx.SYNODIC_PERIOD)) - 180;
 
-        if (phaseAngle > 360) {
-            phaseAngle = phaseAngle - 360;
-        }
-
-        return Math.abs(phaseAngle);
+        return phaseAngle;
     }
 
     /**
@@ -174,10 +170,10 @@ public class MoonFx {
      */
     public double getIlluminatedRatio(double synodicAge) {
         double phaseAngle = getPhaseAngle(synodicAge),
-                ofCosine   = (1 - Math.cos(Math.toRadians(phaseAngle))),
+                ofCosine   = (1 + Math.cos(Math.toRadians(phaseAngle))),
                 ratioOfIllumination = ofCosine * 0.5;
 
-        return ratioOfIllumination;
+        return ratioOfIllumination * 100;
 
     }
 
@@ -189,7 +185,7 @@ public class MoonFx {
      */
     private double _normalize(double value) {
 
-        value = value - (int)value;
+        value = value - Math.round(value);
 
         if (value < 0){
             value = value + 1;

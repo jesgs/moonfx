@@ -32,19 +32,28 @@ public class MoonFXMain {
 
         Calendar today = Calendar.getInstance();
         MoonFx mnf = new MoonFx();
+        int count = 0;
+        int total = 28;
+        long nextDayInMillis = today.getTimeInMillis();
 
-        mnf.setDate(today.getTime());
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy");
+        do {
+            today.setTimeInMillis(nextDayInMillis);
+            mnf.setDate(today.getTime());
+            SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy");
 
-        String date = sdf.format(today.getTime());
+            String date = sdf.format(today.getTime());
 
-        System.out.println("========== " + date + "==========");
-        System.out.println(today.getTime());
-        System.out.println("Julian Date: " + mnf.getJulianDate());
-        System.out.println("Moon's age from new (days): " + mnf.getSynodicPhase());
-        System.out.println("Phase Angle: "  + mnf.getPhaseAngle(mnf.getSynodicPhase()));
-        System.out.println("Illuminated Ratio: " + (mnf.getIlluminatedRatio(mnf.getSynodicPhase()) * 100));
-        System.out.println("Distance (Earth radii): " + (int)mnf.getDistanceInEarthRadii());
-        System.out.println("Distance (Miles): " + (int)(mnf.getDistanceInEarthRadii() * MoonFx.EARTH_RADIUS_MI));
+            System.out.println("========== " + date + "==========");
+            System.out.println(today.getTime());
+            System.out.println("Julian Date: " + mnf.getJulianDate());
+            System.out.println("Moon's age from new (days): " + mnf.getSynodicPhase());
+            System.out.println("Phase Angle: " + mnf.getPhaseAngle(mnf.getSynodicPhase()));
+            System.out.println("Illuminated Ratio: " + mnf.getIlluminatedRatio(mnf.getSynodicPhase()));
+            System.out.println("Distance (Earth radii): " + (int) mnf.getDistanceInEarthRadii());
+            System.out.println("Distance (Miles): " + (int) (mnf.getDistanceInEarthRadii() * MoonFx.EARTH_RADIUS_MI));
+
+            nextDayInMillis = today.getTimeInMillis() + MoonFx.ONE_DAY;
+            count++;
+        }  while (count < total);
     }
 }
