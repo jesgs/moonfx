@@ -125,7 +125,6 @@ public class MoonFx {
      * @return double
      */
     public double getJulianDate() {
-
         Calendar gregorianDateCalendar = Calendar.getInstance();
         gregorianDateCalendar.setTime(this.getDate());
 
@@ -133,18 +132,28 @@ public class MoonFx {
         int day   = gregorianDateCalendar.get(Calendar.DAY_OF_MONTH);
         int year  = gregorianDateCalendar.get(Calendar.YEAR);
 
-        long year2 = year - ((12 - month) / 10);
-        long month2 = month + 9;
-        if (month2 >= 12) {
-            month2 = month2 - 12;
+        if (month <= 2) {
+            year -= 1;
+            month += 12;
         }
 
-        double julianDate = (365.25 * (year2 + 4712)) + (30.6 * month2 + .5) + day + 59;
-
-        if (julianDate > 2299160) {
-            double k3 = (((year2 / 100) + 49) * 0.75) - 38;
-            julianDate = julianDate - k3;
+        double b = 0;
+        double a;
+        if (dateInGregorianCalendar(gregorianDateCalendar)) {
+            a = Math.floor(year / 100);
+            b = (2 - a + Math.floor(a / 4));
         }
+
+        double c;
+        if (year < 0) {
+            c = Math.floor((365.25 * year) - 0.75);
+        } else {
+            c = Math.floor(365.25 * year);
+        }
+
+        double d = Math.floor(30.6001 * (month  + 1));
+
+        double julianDate = b + c + d + gregorianDateCalendar.get(Calendar.DAY_OF_MONTH) + 1720994.5;
 
         return julianDate;
     }
@@ -157,8 +166,8 @@ public class MoonFx {
      * @return
      */
     public double getPhaseAngle(double synodicAge) {
-//        double phaseAngle = (synodicAge * (360 / SYNODIC_PERIOD));
-        double phaseAngle = (synodicAge / SYNODIC_PERIOD) * 360;
+        double synodicAgeInRadians = Math.toRadians(synodicAge * 13);
+        double phaseAngle = 0.5 * (1 - Math.cos(synodicAgeInRadians)) * 360;
 
         return phaseAngle;
     }
@@ -170,10 +179,25 @@ public class MoonFx {
      * @return
      */
     public double getIlluminatedRatio(double synodicAge) {
-        double phaseAngle = getPhaseAngle(synodicAge);
-        double fi = (1 + Math.cos(180 - phaseAngle)) * 0.5;
+        return 100.00;
+    }
 
-        return fi;
+    /**
+     * Check if date is after 1582 (Gregorian Calendar)
+     *
+     * @param calendarDate
+     * @return
+     */
+    private boolean dateInGregorianCalendar(Calendar calendarDate) {
+
+        int year = calendarDate.get(Calendar.YEAR);
+        int month = calendarDate.get(Calendar.MONTH) + 1;
+        int day = calendarDate.get(Calendar.DAY_OF_MONTH);
+
+        return (
+                year > 1582 ||
+                (year == 1582 && month > 10) ||
+                (year == 1582 && month == 10 && day >= 15));
     }
 
     /**

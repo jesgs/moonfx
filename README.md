@@ -59,5 +59,17 @@ Distance (Miles): 231066
 ```
 
 ### Changelog
-* 1.0.1 Adjusted Julian Date calculation for better precision
-* 1.0.0 Initial release
+
+* 1.1.0 — Current development version
+    
+    - [ ] Refactored Julian Date method
+    - [ ] Refactored phase angle calculations
+    - [ ] Refactored illuminated ratio calculations
+
+* 1.0.1 — Stable
+
+    - [x] Adjusted Julian Date calculation for better precision
+
+* 1.0.0 
+    
+    - [x] Initial release
