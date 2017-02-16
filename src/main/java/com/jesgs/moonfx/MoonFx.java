@@ -86,9 +86,9 @@ public class MoonFx {
      * @return Moon's age in days (number of days from New Moon)
      */
     public double getSynodicPhase() {
-        double moonsAge = (this._normalize((this.getJulianDate() - 2451550.1) / 29.530588853) * 29.53);
+        double moonsAge = (this.getJulianDate() - 2451550.1) / SYNODIC_PERIOD;
 
-        return moonsAge;
+        return _normalize(moonsAge) * 29.53;
     }
 
     /**
@@ -157,7 +157,8 @@ public class MoonFx {
      * @return
      */
     public double getPhaseAngle(double synodicAge) {
-        double phaseAngle = (synodicAge * (360 / MoonFx.SYNODIC_PERIOD)) - 180;
+//        double phaseAngle = (synodicAge * (360 / SYNODIC_PERIOD));
+        double phaseAngle = (synodicAge / SYNODIC_PERIOD) * 360;
 
         return phaseAngle;
     }
@@ -169,12 +170,10 @@ public class MoonFx {
      * @return
      */
     public double getIlluminatedRatio(double synodicAge) {
-        double phaseAngle = getPhaseAngle(synodicAge),
-                ofCosine   = (1 + Math.cos(Math.toRadians(phaseAngle))),
-                ratioOfIllumination = ofCosine * 0.5;
+        double phaseAngle = getPhaseAngle(synodicAge);
+        double fi = (1 + Math.cos(180 - phaseAngle)) * 0.5;
 
-        return ratioOfIllumination * 100;
-
+        return fi;
     }
 
     /**
