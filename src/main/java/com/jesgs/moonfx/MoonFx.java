@@ -41,7 +41,7 @@ public class MoonFx {
     /**
      * Day constant
      */
-    public static final long ONE_DAY = 86400000;
+    public static final long ONE_DAY = 86400;
 
     /**
      * Moon's Synodic Period (Days)
@@ -125,37 +125,9 @@ public class MoonFx {
      * @return double
      */
     public double getJulianDate() {
-        Calendar gregorianDateCalendar = Calendar.getInstance();
-        gregorianDateCalendar.setTime(this.getDate());
+        long currentTime = getDate().getTime();
 
-        int month = gregorianDateCalendar.get(Calendar.MONTH) + 1;
-        int day   = gregorianDateCalendar.get(Calendar.DAY_OF_MONTH);
-        int year  = gregorianDateCalendar.get(Calendar.YEAR);
-
-        if (month <= 2) {
-            year -= 1;
-            month += 12;
-        }
-
-        double b = 0;
-        double a;
-        if (dateInGregorianCalendar(gregorianDateCalendar)) {
-            a = Math.floor(year / 100);
-            b = (2 - a + Math.floor(a / 4));
-        }
-
-        double c;
-        if (year < 0) {
-            c = Math.floor((365.25 * year) - 0.75);
-        } else {
-            c = Math.floor(365.25 * year);
-        }
-
-        double d = Math.floor(30.6001 * (month  + 1));
-
-        double julianDate = b + c + d + gregorianDateCalendar.get(Calendar.DAY_OF_MONTH) + 1720994.5;
-
-        return julianDate;
+        return ((currentTime / 1000) / ONE_DAY) + 2440587.5;
     }
 
 
@@ -166,8 +138,11 @@ public class MoonFx {
      * @return
      */
     public double getPhaseAngle(double synodicAge) {
-        double synodicAgeInRadians = Math.toRadians(synodicAge * 13);
-        double phaseAngle = 0.5 * (1 - Math.cos(synodicAgeInRadians)) * 360;
+        double phaseAngle = synodicAge * (360 / this.SYNODIC_PERIOD);
+
+        if (phaseAngle > 360) {
+            phaseAngle = phaseAngle - 360;
+        }
 
         return phaseAngle;
     }
@@ -179,7 +154,11 @@ public class MoonFx {
      * @return
      */
     public double getIlluminatedRatio(double synodicAge) {
-        return 100.00;
+        double phaseAngle = this.getPhaseAngle(synodicAge);
+        double ratioOfIllumination = 0.5 * (1 - Math.cos(Math.toRadians(phaseAngle)));
+
+        return ratioOfIllumination;
+
     }
 
     /**

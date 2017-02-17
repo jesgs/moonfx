@@ -62,9 +62,9 @@ Distance (Miles): 231066
 
 * 1.1.0 — Current development version
     
-    - [ ] Refactored Julian Date method
-    - [ ] Refactored phase angle calculations
-    - [ ] Refactored illuminated ratio calculations
+    - [x] Refactored Julian Date method
+    - [x] Refactored phase angle calculations
+    - [x] Refactored illuminated ratio calculations
 
 * 1.0.1 — Stable
 

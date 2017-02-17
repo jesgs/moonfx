@@ -31,7 +31,6 @@ public class MoonFXMain {
     public static void main(String[] args) {
 
         Calendar today = Calendar.getInstance();
-        today.set(2003, 7, 27, 0, 0, 0);
         MoonFx mnf = new MoonFx();
         int count = 0;
         int total = 29;
@@ -44,17 +43,17 @@ public class MoonFXMain {
 
             String date = sdf.format(today.getTime());
 
-            System.out.println("========== " + date + "==========");
+            System.out.println("========== " + date + " ==========");
             System.out.println(today.getTime());
             System.out.println("Julian Date: " + mnf.getJulianDate());
             System.out.println("Moon's age from new (days): " + mnf.getSynodicPhase());
             System.out.println("Phase Angle: " + mnf.getPhaseAngle(mnf.getSynodicPhase()));
-//            System.out.println("Illuminated Ratio: " + mnf.getIlluminatedRatio(mnf.getSynodicPhase()));
+            System.out.println("Illuminated Ratio: " + mnf.getIlluminatedRatio(mnf.getSynodicPhase()));
             System.out.println("Distance (Earth radii): " + (int) mnf.getDistanceInEarthRadii());
             System.out.println("Distance (Miles): " + (int) (mnf.getDistanceInEarthRadii() * MoonFx.EARTH_RADIUS_MI));
             System.out.println("");
 
-            nextDayInMillis = today.getTimeInMillis() + MoonFx.ONE_DAY;
+            nextDayInMillis = today.getTimeInMillis() + (MoonFx.ONE_DAY * 1000);
             count++;
         }  while (count < total);
     }
