@@ -158,7 +158,6 @@ public class MoonFx {
         double ratioOfIllumination = 0.5 * (1 - Math.cos(Math.toRadians(phaseAngle)));
 
         return ratioOfIllumination;
-
     }
 
     /**
