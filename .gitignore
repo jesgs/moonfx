@@ -164,5 +164,4 @@ pip-log.txt
 # Mac crap
 .DS_Store
 src/main/resources/
-src/test/
 target/
