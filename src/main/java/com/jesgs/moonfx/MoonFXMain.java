@@ -15,8 +15,9 @@
  */
 package com.jesgs.moonfx;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 import java.text.SimpleDateFormat;
+import java.time.Month;
 
 /**
  * Main class for debugging purposes
@@ -29,31 +30,28 @@ public class MoonFXMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        Calendar today = Calendar.getInstance();
-//        MoonFx mnf = new MoonFx();
-//        int count = 0;
-//        int total = 29;
-//        long nextDayInMillis = today.getTimeInMillis();
-//
-//        do {
-//            today.setTimeInMillis(nextDayInMillis);
-//            mnf.setDate(today.getTime());
-//            SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy");
-//
-//            String date = sdf.format(today.getTime());
-//
-//            System.out.println("========== " + date + " ==========");
-//            System.out.println(today.getTime());
-//            System.out.println("Julian Date: " + mnf.getJulianDate());
-//            System.out.println("Moon's age from new (days): " + mnf.getSynodicPhase());
-//            System.out.println("Phase Angle: " + mnf.getPhaseAngle(mnf.getSynodicPhase()));
-//            System.out.println("Illuminated Ratio: " + Math.round(mnf.getIlluminatedRatio(mnf.getSynodicPhase()) * 100) + "%");
-//            System.out.println("Distance (Earth radii): " + (int) mnf.getDistanceInEarthRadii());
-//            System.out.println("Distance (Miles): " + (int) (mnf.getDistanceInEarthRadii() * MoonFx.EARTH_RADIUS_MI));
-//            System.out.println("");
-//
-//            nextDayInMillis = today.getTimeInMillis() + (MoonFx.ONE_DAY * 1000);
-//            count++;
-//        }  while (count < total);
+        LocalDateTime currentTime = LocalDateTime.now();
+        // time of Full Moon on February 11th, 2017
+        LocalDateTime testDate = LocalDateTime.of(2017, Month.FEBRUARY, 11, 0, 33, 0);
+
+        MoonFx mnf = new MoonFx();
+        int count = 0;
+        int total = 29;
+
+        do {
+            mnf.setDate(testDate);
+
+            System.out.println("========== " + testDate.toString() + " ==========");
+            System.out.println("Julian Date: " + mnf.getJulianDate());
+            System.out.println("Moon's age from new (days): " + mnf.getSynodicPhase());
+            System.out.println("Phase Angle: " + mnf.getPhaseAngle(mnf.getSynodicPhase()));
+            System.out.println("Illuminated Ratio: " + Math.round(mnf.getIlluminatedRatio(mnf.getSynodicPhase()) * 100) + "%");
+            System.out.println("Distance (Earth radii): " + (int) mnf.getDistanceInEarthRadii());
+            System.out.println("Distance (Miles): " + (int) (mnf.getDistanceInEarthRadii() * MoonFx.EARTH_RADIUS_MI));
+            System.out.println("");
+            count++;
+
+            testDate = testDate.plusDays(count);
+        }  while (count < total);
     }
 }
