@@ -17,9 +17,9 @@ package com.jesgs.moonfx;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.lang.Math;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 /**
  * MoonFx Class
@@ -51,14 +51,14 @@ public class MoonFx {
     /**
      * Date to check moon properties
      */
-    protected Date moonDate;
+    protected LocalDateTime moonDate;
 
     /**
      * Set the date
      *
-     * @param date Date to process
+     * @param LocalDateTime Date to process
      */
-    public MoonFx setDate(Date date) {
+    public MoonFx setDate(LocalDateTime date) {
         this.moonDate = date;
 
         return this;
@@ -69,7 +69,7 @@ public class MoonFx {
      *
      * @return String
      */
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return this.moonDate;
     }
 
@@ -125,9 +125,12 @@ public class MoonFx {
      * @return double
      */
     public double getJulianDate() {
-        long currentTime = getDate().getTime();
+        // use float for accuracy
+        float currentTime = getDate().toEpochSecond(ZoneOffset.UTC);
 
-        return ((currentTime / 1000) / ONE_DAY) + 2440587.5;
+        // julian date calculation based from unix timestamp
+        // 2440587.5 is January 1st, 1970 @ Mid-night UTC
+        return (currentTime / ONE_DAY) + 2440587.5;
     }
 
 
@@ -138,8 +141,8 @@ public class MoonFx {
      * @return
      */
     public double getPhaseAngle(double synodicAge) {
-        double phaseAngle = synodicAge * (360 / this.SYNODIC_PERIOD);
-
+        double phaseAngle = synodicAge * (360 / SYNODIC_PERIOD);
+        System.out.println(synodicAge);
         if (phaseAngle > 360) {
             phaseAngle = phaseAngle - 360;
         }
@@ -158,24 +161,6 @@ public class MoonFx {
         double ratioOfIllumination = 0.5 * (1 - Math.cos(Math.toRadians(phaseAngle)));
 
         return ratioOfIllumination;
-    }
-
-    /**
-     * Check if date is after 1582 (Gregorian Calendar)
-     *
-     * @param calendarDate
-     * @return
-     */
-    private boolean dateInGregorianCalendar(Calendar calendarDate) {
-
-        int year = calendarDate.get(Calendar.YEAR);
-        int month = calendarDate.get(Calendar.MONTH) + 1;
-        int day = calendarDate.get(Calendar.DAY_OF_MONTH);
-
-        return (
-                year > 1582 ||
-                (year == 1582 && month > 10) ||
-                (year == 1582 && month == 10 && day >= 15));
     }
 
     /**
