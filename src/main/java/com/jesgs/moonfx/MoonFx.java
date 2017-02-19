@@ -127,7 +127,18 @@ public class MoonFx {
      * @return Moon's ecliptic longitude
      */
     public double getEclipticLongitude() {
-        double elon = 0;
+        double julianDate = getJulianDate();
+        double v = ((julianDate - 2451555.8) / 27.321582241);
+        double rp = _normalize(v);
+
+        double v1 = (julianDate - 2451562.2) / 27.55454988;
+        double dp = _normalize(v1) * PI_RADIANS;
+
+        double ip = getSynodicPhase() * PI_RADIANS;
+
+        double elon = 360 * rp + 6.3 * Math.sin(dp)
+                        + 1.3 * Math.sin(2 * ip - dp)
+                        + 0.7 * Math.sin(2 * ip);
 
         return elon;
     }

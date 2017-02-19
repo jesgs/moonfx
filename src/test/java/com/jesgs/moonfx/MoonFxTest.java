@@ -14,7 +14,6 @@ import static org.junit.Assert.*;
 
 public class MoonFxTest {
     private MoonFx moonFx;
-    private String decimalFormat = "#.##";
 
     @Before
     public void setUp() throws Exception {
@@ -67,6 +66,7 @@ public class MoonFxTest {
 
     @Test
     public void testIlluminatedRatio() {
+        String decimalFormat = "#.##";
         DecimalFormat df = new DecimalFormat(decimalFormat);
         double synodicAge = moonFx.getSynodicPhase();
         double illuminatedRatio = Double.valueOf(df.format(moonFx.getIlluminatedRatio(synodicAge)));
@@ -88,5 +88,15 @@ public class MoonFxTest {
         double delta = 3000;
 
         assertEquals(avgDistance, distanceInKm, delta);
+    }
+
+    @Test
+    public void testEclipticLongitude() {
+        // avg ecliptic longitude between two sources
+        double expectedEclipticLongitude = 142.456;
+        double elon = moonFx.getEclipticLongitude();
+        double delta = 2;
+
+        assertEquals(expectedEclipticLongitude, elon, delta);
     }
 }
