@@ -108,7 +108,7 @@ public class MoonFx {
     }
 
     /**
-     * Get position of Moon
+     * Get moon's ecliptic latitude based on nodal (draconic) phase
      *
      * @return Moon's ecliptic latitude
      */
@@ -119,6 +119,17 @@ public class MoonFx {
         double elat = 5.1 * Math.sin(eclipticLatitudeRadians);
 
         return elat;
+    }
+
+    /**
+     * Get the moon's ecliptic longitude based on sidereal motion
+     *
+     * @return Moon's ecliptic longitude
+     */
+    public double getEclipticLongitude() {
+        double elon = 0;
+
+        return elon;
     }
 
     /**
