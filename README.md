@@ -66,7 +66,7 @@ Distance (Miles): 231066
     - [x] Refactored phase angle calculations
     - [x] Refactored illuminated ratio calculations
     - [ ] Add unit tests
-    - [ ] Add automated testing
+    - [x] Add automated testing
 
 * 1.0.1 — Stable
 
