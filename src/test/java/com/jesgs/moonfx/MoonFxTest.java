@@ -65,4 +65,15 @@ public class MoonFxTest {
 
         assertEquals(expectedIlluminatedRatio, illuminatedRatio, delta);
     }
+
+    @Test
+    public void testMoonDistance() {
+        // avg distance from three sources: 377669.691KM
+        // on February 11th, 2017 @ 00:33am UTC
+        double avgDistance = 377669.691;
+        double distanceInKm = (moonFx.getDistanceInEarthRadii() * moonFx.EARTH_RADIUS_MI) * 1.60934;
+        double delta = 3000;
+
+        assertEquals(avgDistance, distanceInKm, delta);
+    }
 }
