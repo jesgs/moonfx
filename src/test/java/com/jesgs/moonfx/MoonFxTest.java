@@ -40,6 +40,19 @@ public class MoonFxTest {
     }
 
     @Test
+    public void testSynodicPhase() {
+        // Synodic age is counted as days since last new moon
+        // last new moon prior to date used in testing was on
+        // January 27th, 2017. Full Moon usually occurs 13 to 15 days
+        // after New Moon, averaging 14 days
+        double synodicAge = moonFx.getSynodicPhase();
+        double expectedSynodicAge = 14.5;
+        double delta = 1.5;
+
+        assertEquals(expectedSynodicAge, synodicAge, delta);
+    }
+
+    @Test
     public void testPhaseAngle() {
         // some calculations put Full Moon phase angle as 0 degrees,
         // others use 180. I've chosen to use 180 since the moon is at
