@@ -99,4 +99,13 @@ public class MoonFxTest {
 
         assertEquals(expectedEclipticLongitude, elon, delta);
     }
+
+    @Test
+    public void testEclipticLatitude() {
+        double expectedEclipticLatitude = -0.984;
+        double eclipticLatitude = moonFx.getEclipticLatitude();
+        double delta = 1;
+
+        assertEquals(expectedEclipticLatitude, eclipticLatitude, delta);
+    }
 }
