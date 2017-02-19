@@ -56,7 +56,7 @@ public class MoonFx {
     /**
      * Set the date
      *
-     * @param LocalDateTime Date to process
+     * @param date Date to use for calculations
      */
     public MoonFx setDate(LocalDateTime date) {
         this.moonDate = date;
@@ -113,10 +113,12 @@ public class MoonFx {
      * @return Moon's ecliptic latitude
      */
     public double getEclipticLatitude() {
-        double value = this._normalize((this.getJulianDate() - 2451565.2) / 27.212220817);
-        double eclipticLatitudeRadians = value * MoonFx.PI_RADIANS; // Convert to radians
+        double value = (getJulianDate() - (float)2451565.2) / (float)27.212220817;
+        value = _normalize(value);
+        double eclipticLatitudeRadians = value * PI_RADIANS; // Convert to radians
+        double elat = 5.1 * Math.sin(eclipticLatitudeRadians);
 
-        return eclipticLatitudeRadians;
+        return elat;
     }
 
     /**
@@ -170,8 +172,7 @@ public class MoonFx {
      * @return
      */
     private double _normalize(double value) {
-
-        value = value - Math.round(value);
+        value = value - Math.floor(value);
 
         if (value < 0){
             value = value + 1;
