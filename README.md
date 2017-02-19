@@ -22,17 +22,19 @@ In app build.gradle:
 	}
 ```
 ### Usage
-`void setDate(Date date)` Sets the current date. Uses `java.util.Date`
+`void setDate(LocalDateTime date)` Sets the current date. Uses `java.time.LocalDateTime`
 
-`Date getDate()` Gets the current date in the form of a Date object
+`LocalDateTime getDate()` Gets the current date in the form of a Date object
 
 `String getFormattedDate(String format)` Returns a formatted date string, format specified by `format` parameter
 
-`double getSynodicDate()` Get current synodic phase of the moon, aka Moon's age in days (number of days from New Moon)
+`double getSynodicPhase()` Get current synodic phase of the moon, aka Moon's age in days (number of days from New Moon)
 
 `double getDistanceInEarthRadii()` Get distance measured in Earth radii
 
-`double getEclipticLatitude()` Get position of the Moon, aka Moon's ecliptic latitude
+`double getEclipticLatitude()` Get moon's ecliptic latitude
+
+`double getEclipticLongitude()` Get moon's ecliptic longitude
 
 `double getJulianDate()` Get the Julian Date for the date specified by setDate()
 
@@ -65,7 +67,7 @@ Distance (Miles): 231066
     - [x] Refactored Julian Date method
     - [x] Refactored phase angle calculations
     - [x] Refactored illuminated ratio calculations
-    - [ ] Add unit tests
+    - [x] Add unit tests
     - [x] Add automated testing
 
 * 1.0.1 — Stable
